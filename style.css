@@ -417,30 +417,58 @@ body.hell-theme #gauge-container {
     inset 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-#action-text,
-#item-notification {
+/* ✨ 통쾌! 애니메이션 개편 */
+#action-text {
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 36px;
-  font-weight: 900;
-  text-align: center;
-  white-space: pre-line;
-  z-index: 20;
-  pointer-events: none;
-  opacity: 1;
-  line-height: 1.2;
-  transition:
-    opacity 0.6s ease-out,
-    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 150px;
+  font-weight: normal;
+  color: #ff1744;
   text-shadow:
-    0 0 15px rgba(0, 0, 0, 0.8),
-    2px 2px 0 #000;
+    0 0 20px rgba(255, 0, 0, 0.8),
+    0 0 50px rgba(255, 255, 255, 0.5);
+  z-index: 2000;
+  pointer-events: none;
+  white-space: nowrap;
 }
+
+.text-pop {
+  animation: zoom-in-out 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes zoom-in-out {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ✨ 시스템 알림 및 퀴즈 결과창 폰트 & 애니메이션 연동 */
 #item-notification {
+  position: absolute;
   top: 40%;
-  font-size: 24px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px; /* 텍스트 길이를 고려해 통쾌(150px)보다는 약간 작게 설정 */
+  font-family: 'Ma Shan Zheng', cursive;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 2000;
+  pointer-events: none;
+  text-shadow:
+    0 0 20px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(255, 255, 255, 0.4);
 }
 .text-pop {
   transform: translate(-50%, -50%) scale(1.2) !important;
@@ -467,4 +495,164 @@ body.hell-theme #gauge-container {
   transition:
     transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     opacity 0.3s ease-out;
+}
+
+/* ✨ 랭킹 & 게임오버 UI 세련된 디자인 */
+#player-name {
+  font-size: 22px;
+  padding: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+  border-radius: 8px;
+  border: 2px solid #00e5ff;
+  background: rgba(0, 229, 255, 0.1);
+  color: #fff;
+  width: 260px;
+  outline: none;
+  transition: 0.3s;
+}
+#player-name:focus {
+  box-shadow: 0 0 15px #00e5ff;
+}
+
+/* 게임오버 및 랭킹창 하단 버튼 공통 스타일 */
+#save-rank-btn,
+#close-rank-btn,
+#restart-btn {
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
+#save-rank-btn {
+  background: linear-gradient(135deg, #f1c40f, #e67e22);
+  color: #000;
+}
+#save-rank-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #f1c40f;
+}
+
+#restart-btn,
+#close-rank-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #fff;
+  color: #fff;
+}
+#restart-btn:hover,
+#close-rank-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ✨ 명예의 전당(랭킹창) 메인 UI */
+#ranking-ui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 3px solid #f1c40f;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 1000;
+  width: 400px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+/* ✨ 랭크 탭 (노말/헬) 디자인 및 간격 조정 */
+.rank-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px; /* 헤더와의 간격을 시원하게 넓힘 */
+  gap: 15px; /* 두 버튼 사이의 간격 */
+}
+
+.rank-tabs button {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  color: #888;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px; /* 부드러운 둥근 모서리 */
+  transition: all 0.3s ease;
+}
+
+.rank-tabs button.active {
+  color: #f1c40f;
+  background: rgba(241, 196, 15, 0.15);
+  border-color: #f1c40f;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.2);
+  transform: translateY(-3px); /* 선택된 탭이 위로 살짝 떠오르는 효과 */
+}
+
+/* ✨ 리스트 항목 헤더 (순위, 닉네임, 점수, 레벨) */
+.rank-list-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.6); /* 은은한 배경색 추가로 가독성 향상 */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 12px 10px; /* 위아래 여백을 주어 답답함 해소 */
+  margin-bottom: 15px;
+  color: #ddd;
+  font-size: 15px;
+}
+
+/* ✨ 랭킹 리스트 여백 및 디자인 조정 */
+#rank-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  height: 250px;
+  overflow-y: auto;
+}
+
+#rank-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px; /* 리스트 간격을 살짝 늘려 가독성 확보 */
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+#rank-list li:hover {
+  background: rgba(255, 255, 255, 0.05); /* 마우스 올리면 살짝 밝아지는 효과 */
+  border-radius: 4px;
+}
+
+/* 개별 항목 너비 및 폰트 세팅 */
+#rank-list li .rank-rank {
+  width: 15%;
+  font-weight: bold;
+  color: #f1c40f;
+}
+#rank-list li .rank-name {
+  width: 35%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#rank-list li .rank-score {
+  width: 30%;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+#rank-list li .rank-level {
+  width: 20%;
+  color: #00e5ff;
 }
