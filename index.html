@@ -5,8 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>진담중국어 테트리스</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap"
+      rel="stylesheet"
+    />
+
+    <div
+      id="action-text"
+      class="hidden"
+      style="font-family: 'Ma Shan Zheng', cursive"
+    >
+      痛快
+    </div>
+    <div id="flash-effect" class="hidden"></div>
   </head>
   <body>
+    <div
+      style="
+        font-family: 'Ma Shan Zheng', cursive;
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      "
+    >
+      font preload
+    </div>
     <div id="game-wrapper">
       <div id="game-container">
         <!-- ✨ 1. 항상 떠 있는 고정 타이틀 -->
@@ -63,19 +86,40 @@
         </div>
 
         <div id="game-over-ui" class="hidden">
-          <h1 class="game-over-title">GAME OVER</h1>
-          <div class="stats-box">
-            <p>최종 점수: <span id="final-score">0</span></p>
-            <p>달성 레벨: <span id="final-level">1</span></p>
-            <p>제거한 줄: <span id="final-lines">0</span></p>
+          <h1>GAME OVER</h1>
+          <p>SCORE: <span id="final-score"></span></p>
+          <p>LEVEL: <span id="final-level"></span></p>
+          <p>LINES: <span id="final-lines"></span></p>
+
+          <div style="margin: 20px 0">
+            <input
+              type="text"
+              id="player-name"
+              placeholder="닉네임 (최대 6자)"
+              maxlength="6"
+              autocomplete="off"
+            />
+            <br />
+            <button id="save-rank-btn">기록 저장 및 랭킹 보기</button>
           </div>
-          <button
-            id="restart-btn"
-            class="option-btn"
-            style="background-color: #e74c3c"
-          >
-            로비로 돌아가기
-          </button>
+
+          <button id="restart-btn">메인 화면으로</button>
+        </div>
+
+        <div id="ranking-ui" class="hidden">
+          <h1>🏆 명예의전당</h1>
+          <div class="rank-tabs">
+            <button id="tab-normal" class="active">🟢 NORMAL</button>
+            <button id="tab-hell">🔥 HELL</button>
+          </div>
+          <div class="rank-list-header">
+            <span style="width: 15%">순위</span>
+            <span style="width: 35%">닉네임</span>
+            <span style="width: 30%">점수</span>
+            <span style="width: 20%">레벨</span>
+          </div>
+          <ul id="rank-list"></ul>
+          <button id="close-rank-btn">닫기 (메인 화면)</button>
         </div>
 
         <div id="action-text" class="hidden">TETRIS!</div>
